@@ -9,7 +9,7 @@ class Solution {
         { 0, 1 },
         { 0,-1 }
     };
-    public class Node {
+    public class Node implements Comparable<Node>{
         public int x;
         public int y;
         public int diff;
@@ -17,6 +17,9 @@ class Solution {
             this.x = x;
             this.y = y;
             this.diff = diff;
+        }
+        public int compareTo( Node o){
+            return this.diff-o.diff;
         }
     }
     public int minimumEffortPath(int[][] heights) {
@@ -28,7 +31,7 @@ class Solution {
         for (int[] v: visited) {
             Arrays.fill(v, Integer.MAX_VALUE);
         }
-        PriorityQueue<Node> q = new PriorityQueue<>((a, b) -> a.diff - b.diff);
+        PriorityQueue<Node> q = new PriorityQueue<>();
         q.add(new Node(0, 0, 0));
         visited[0][0] = 0;
         while (!q.isEmpty()) {
