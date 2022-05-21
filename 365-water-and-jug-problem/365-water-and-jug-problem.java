@@ -1,4 +1,5 @@
 class Solution {
+    //for interview revise from the BFS approach that has given tle from the code submission
     public boolean canMeasureWater(int j1, int j2, int t) {
         if (t > j1 + j2) return false;
         boolean[] v = new boolean[j1 + j2 + 1];        
