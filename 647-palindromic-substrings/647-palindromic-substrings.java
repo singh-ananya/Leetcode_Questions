@@ -11,8 +11,7 @@ class Solution {
         return true;
     }
     public int countSubstrings(String str) {
-         String temp = "";
-        StringBuffer stf;
+        String temp = "";
         int count = 0;
         
         for (int i = 0; i < str.length(); i++) {
