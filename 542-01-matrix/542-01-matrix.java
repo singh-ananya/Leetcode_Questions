@@ -28,7 +28,7 @@ class Solution {
                 {
                     int i=x+dir[0];
                     int j=y+dir[1];
-                    if(i>=0 && j>=0 && i<mat.length && j<mat[0].length)
+                    if(i>=0 && j>=0 && i<mat.length && j<mat[0].length && mat[i][j]!=-1)
                         q.add(new int[]{i,j});
                 }
             }
