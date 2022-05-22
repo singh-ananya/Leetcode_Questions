@@ -1,20 +1,6 @@
 class Solution {
-    public boolean dfs(ArrayList<ArrayList<Integer>> graph,int vis[],int src,ArrayList<Integer> ans){
-        vis[src]=1;
-        for(int nbr:graph.get(src)){
-            if(vis[nbr]==0){
-               boolean cycle=dfs(graph,vis,nbr,ans);
-                if(cycle)
-                    return true;
-            }else if(vis[nbr]==1)
-                return true;
-        }
-        vis[src]=2;
-        ans.add(src);
-        return false;
-    }
     public int[] findOrder(int numCourses, int[][] prerequisites) {
-        ArrayList<ArrayList<Integer>> graph=new ArrayList<>();
+       ArrayList<ArrayList<Integer>> graph=new ArrayList<>();
         for(int i=0;i<numCourses;i++){
             graph.add(new ArrayList<>());
         }
@@ -25,24 +11,39 @@ class Solution {
             
         }
         int vis[]=new int[numCourses];
-        ArrayList<Integer> ans=new ArrayList<>();
-        for(int i=0;i<numCourses;i++){
-            if(vis[i]==0){
-                boolean check=dfs(graph,vis,i,ans);
-                if(check==true){
-                    return new int[]{};
+        int ind[]=new int[numCourses];
+        for(int u=0;u<numCourses;u++){
+            for(int v:graph.get(u)){
+                ind[v]++;
+            }
+        }
+        Queue<Integer> q=new ArrayDeque<>();
+        ArrayList<Integer> topo=new ArrayList<>();
+        for(int i=0;i<ind.length;i++){
+            if(ind[i]==0){
+                q.add(i);
+                topo.add(i);
+            }
+        }
+        while(q.size()>0){
+            int t=q.remove();
+            for(int nbr:graph.get(t)){
+                ind[nbr]--;
+                if(ind[nbr]==0){
+                    q.add(nbr);
+                    topo.add(nbr);
                 }
             }
         }
-        // for(int i=0;i<vis.length;i++){
-        //     if(vis[i]==2)
-        //         ans.add(i);
-        // }
-        int []res=new int[ans.size()];
-        //int idx=0;
-        for(int i=0;i<ans.size();i++){
-            res[i]=ans.get(ans.size()-i-1);
+        if(topo.size()==numCourses){
+            int ans[]=new int[numCourses];
+            int k=0;
+            for(int i=0;i<numCourses;i++){
+                ans[k++]=topo.get(i);
+            }
+            return ans;
+        }else{
+            return new int[]{};
         }
-        return res;
     }
 }
