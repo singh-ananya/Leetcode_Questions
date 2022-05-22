@@ -1,4 +1,5 @@
 class Solution {
+    int [][]dirs={{0,1},{0,-1},{1,0},{-1,0}};
     public boolean dfs(int[][] grid,int i,int j){
         if(i<0 ||i>=grid.length||j<0 || j>=grid[0].length){
             return false;
@@ -6,11 +7,14 @@ class Solution {
         if(grid[i][j]==1)
             return true;
         grid[i][j]=1;
-        boolean a=dfs(grid,i+1,j);
-        boolean b=dfs(grid,i-1,j);
-        boolean c=dfs(grid,i,j+1);
-        boolean d=dfs(grid,i,j-1);
-        return a && b && c && d;
+        boolean ans = true;
+        for(int[] dir:dirs){
+            int x=i+dir[0];
+            int y=j+dir[1];
+            ans=dfs(grid,x,y) && ans;
+            
+        }
+        return ans;
         
     }
     public int closedIsland(int[][] grid) {
