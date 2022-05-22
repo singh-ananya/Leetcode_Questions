@@ -38,14 +38,14 @@ class Solution {
                 }
             }
         }
-        if(topo.size()==numCourses){
+        if(topo.size()==numCourses){ // if topological order is eqaul to no of nodes means no cycle
             int ans[]=new int[numCourses];
             int k=0;
             for(int i=0;i<numCourses;i++){
                 ans[k++]=topo.get(i);
             }
             return ans;
-        }else{
+        }else{// we detected cycle because there some elements whose indegree never becomes 0 , no sol exists
             return new int[]{};
         }
     }
