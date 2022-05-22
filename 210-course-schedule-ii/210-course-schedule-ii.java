@@ -1,4 +1,7 @@
 class Solution {
+    //by using kahn's algo
+    //BFS algo to find cycle in directed graph
+    //topological sort by using BFS
     public int[] findOrder(int numCourses, int[][] prerequisites) {
        ArrayList<ArrayList<Integer>> graph=new ArrayList<>();
         for(int i=0;i<numCourses;i++){
@@ -13,7 +16,7 @@ class Solution {
         int vis[]=new int[numCourses];
         int ind[]=new int[numCourses];
         for(int u=0;u<numCourses;u++){
-            for(int v:graph.get(u)){
+            for(int v:graph.get(u)){//increase indegree of v that starts from the given u i.e the number of dependent source node on dest node
                 ind[v]++;
             }
         }
@@ -28,7 +31,7 @@ class Solution {
         while(q.size()>0){
             int t=q.remove();
             for(int nbr:graph.get(t)){
-                ind[nbr]--;
+                ind[nbr]--;//decrease indegree because no of dependent nodes are decreasing
                 if(ind[nbr]==0){
                     q.add(nbr);
                     topo.add(nbr);
