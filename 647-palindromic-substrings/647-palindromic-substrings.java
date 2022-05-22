@@ -1,4 +1,15 @@
 class Solution {
+    public boolean ispal(String str){
+        int st=0;
+        int ed=str.length()-1;
+        while(st<ed){
+            if(str.charAt(st)!=str.charAt(ed))
+                return false;
+            st++;
+            ed--;
+        }
+        return true;
+    }
     public int countSubstrings(String str) {
          String temp = "";
         StringBuffer stf;
@@ -6,15 +17,9 @@ class Solution {
         
         for (int i = 0; i < str.length(); i++) {
             for (int j = i+1 ; j <=str.length(); j++) {
-               
                 temp = str.substring(i, j);
-                
-                    // Use StringBuffer class to reverse the string
-                    stf = new StringBuffer(temp);
-                    stf.reverse();
-                    // Compare substring with reverse of substring
-                    if (stf.toString().compareTo(temp) == 0)
-                        count++;
+                if(ispal(temp))
+                    count++;
                 
             }
         }
