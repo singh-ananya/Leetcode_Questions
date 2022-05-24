@@ -20,8 +20,10 @@ class Solution {
         if(root==null)
             return;
         ans.add(root.val);
-        helper(root.left,sum);
-        helper(root.right,sum);
+        if(root.left!=null)
+            helper(root.left,sum);
+        if(root.right!=null)
+            helper(root.right,sum);
         int tmp=0;
         for(int i=ans.size()-1;i>=0;i--){
             tmp+=ans.get(i);
