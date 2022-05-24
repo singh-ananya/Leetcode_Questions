@@ -1,4 +1,8 @@
 class Solution {
+    //quite similar as number of islands
+    //TC: 0(m*n)
+    //m = num of rows, n = num of cols
+    //SC: O(1)
     int dirs[][]={{1,0},{0,1},{-1,0},{0,-1}};
     public int countBattleships(char[][] board) {
        int count=0;
