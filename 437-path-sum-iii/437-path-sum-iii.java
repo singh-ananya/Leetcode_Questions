@@ -1,34 +1,41 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
 class Solution {
-    
-    List<Integer> path = new ArrayList<>();
-    int paths = 0;
-    
-    void dfs(TreeNode node, int sum) {
-        
-        if(node == null)
+    List<Integer> ans=new ArrayList<>();
+    int cnt=0;
+    public void helper(TreeNode root, int sum){
+        if(root==null)
             return;
-        
-        path.add(node.val);
-        
-        dfs(node.left, sum);
-        dfs(node.right, sum);
-        
-        int temp = 0;
-        for(int i=path.size()-1; i>=0; i--) {
-            
-            temp += path.get(i);
-            
-            if(temp == sum)
-                paths++;
+        ans.add(root.val);
+        helper(root.left,sum);
+        helper(root.right,sum);
+        int tmp=0;
+        for(int i=ans.size()-1;i>=0;i--){
+            tmp+=ans.get(i);
+            if(sum==tmp){
+                cnt++;
+            }
         }
-        
-        path.remove(path.size()-1);
+        ans.remove(ans.size()-1);
     }
-    
     public int pathSum(TreeNode root, int targetSum) {
+        if(root==null)
+            return cnt;
+        helper(root,targetSum);
+        return cnt;
         
-        dfs(root, targetSum);
-        
-        return paths;
     }
 }
