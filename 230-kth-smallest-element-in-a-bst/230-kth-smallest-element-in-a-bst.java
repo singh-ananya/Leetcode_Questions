@@ -14,6 +14,7 @@
  * }
  */
 class Solution {
+    //the inorder traversal of a BST is sorted is ascending order
     List<TreeNode> inorder=new ArrayList<>();
     public void irorderTraversal(TreeNode root){
         if(root==null)
