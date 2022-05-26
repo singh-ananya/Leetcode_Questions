@@ -1,30 +1,33 @@
 class Solution {
-    class pair{
-        int v;
-        int level;
-        pair(int v, int level){
-            this.v=v;
-            this.level=level;
-        }
-    }
+    // class pair{
+    //     int v;
+    //     int level;
+    //     pair(int v, int level){
+    //         this.v=v;
+    //         this.level=level;
+    //     }
+    // }
     public boolean bfs(ArrayList<ArrayList<Integer>> graph,int []vis,int src){
-        Queue<pair> q=new ArrayDeque<>();
-        q.add(new pair(src,0));
+        Queue<Integer> q=new ArrayDeque<>();
+        int color=0;
+        q.add(src);
         while(q.size()>0){
-            pair curr=q.remove();
-            int level=curr.level;
-            int v=curr.v;
-            if(vis[v]!=-1){
-                if(vis[v]!=level)
-                    return false;
-            }else{
-                vis[v]=level;
-            }
-            for(int nbr:graph.get(v)){
-                if(vis[nbr]==-1){
-                    q.add(new pair(nbr,level+1));
+            int size=q.size();
+            while(size-->0){
+                int tmp=q.remove();
+                if(vis[tmp]!=-1){
+                    if(vis[tmp]!=color)
+                        return false;
+                }
+                vis[tmp]=color;
+                for(int nbr:graph.get(tmp)){
+                    if(vis[nbr]==-1){
+                        q.add(nbr);
+                        
+                    }
                 }
             }
+            color=(color+1)%2;
         }
         return true;
     }
