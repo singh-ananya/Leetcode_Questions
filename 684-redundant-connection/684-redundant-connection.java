@@ -37,8 +37,8 @@ class Solution {
             if(p1!=p2)
             {  
                 merge(p1,p2);
-                graph.get(p1).add(p2);
-                graph.get(p2).add(p1);
+                graph.get(u).add(v);
+                graph.get(v).add(u);
             }
             else
                 return edge;
