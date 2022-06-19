@@ -29,8 +29,8 @@ class Solution {
             Edge edge=pq.remove();
             int node=edge.v;
             int dis=edge.wt;
-            if(dist[node]<dis)
-                continue;
+            // if(dist[node]<dis)
+            //     continue;
             for(Edge e:graph.get(node)){
                 if(dis+e.wt<dist[e.v]){
                     dist[e.v]=dis+e.wt;
