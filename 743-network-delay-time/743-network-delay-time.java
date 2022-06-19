@@ -28,12 +28,12 @@ class Solution {
         while(pq.size()>0){
             Edge edge=pq.remove();
             int node=edge.v;
-            int dis=edge.wt;
-            // if(dist[node]<dis)
-            //     continue;
+            int wsf=edge.wt;
+            if(dist[node]<wsf)
+                continue;
             for(Edge e:graph.get(node)){
-                if(dis+e.wt<dist[e.v]){
-                    dist[e.v]=dis+e.wt;
+                if(wsf+e.wt<dist[e.v]){
+                    dist[e.v]=wsf+e.wt;
                     pq.add(new Edge(e.v,dist[e.v]));
                 }
             }
