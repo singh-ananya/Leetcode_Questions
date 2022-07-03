@@ -1,6 +1,8 @@
 class Solution {
     //Here water means land water" not ocean water. Only land water flows to ocean. Ocean water doesn't flow to land.
     // First, we find the cells that can flow to Pacific. Second, we find the cells that can flow to Atlantic. Then we find the intersection! 
+    
+    //we are going in reverse way ie we will start from the boundries
     public List<List<Integer>> pacificAtlantic(int[][] heights) {
         List<List<Integer>> ans=new ArrayList<>();
         int n=heights.length;
