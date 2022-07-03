@@ -1,4 +1,6 @@
 class Solution {
+    //Here water means land water" not ocean water. Only land water flows to ocean. Ocean water doesn't flow to land.
+    // First, we find the cells that can flow to Pacific. Second, we find the cells that can flow to Atlantic. Then we find the intersection! 
     public List<List<Integer>> pacificAtlantic(int[][] heights) {
         List<List<Integer>> ans=new ArrayList<>();
         int n=heights.length;
@@ -39,6 +41,7 @@ class Solution {
                 int ny=y+dir[1];
                 if(nx<0 || ny<0 ||nx>=n ||ny>=m||res[nx][ny])
                     continue;
+                // [x, y] has to be higher or equal to [nx, ny] so the water can flow from [x,y] to [nx, ny]
                 if(heights[nx][ny]>=heights[x][y]){
                     
                     q.add(new int[]{nx,ny});
