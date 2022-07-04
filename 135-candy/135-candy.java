@@ -1,4 +1,8 @@
 class Solution {
+    //tc=o(n)
+    //sc=0(n)
+    //if the (i-1)th & ith children has same rating then ith child recieves no extra candy but if ith child have larger rating then (i-1)th then ith child recieves children[i-1]+1 candies. The children array is actually store the number of candies for each child.
+//I'm traversing the ratings array twice, first time in forward direction & second time in backward direction if the ratings array has any parts which are in decending order.
     public int candy(int[] ratings) {
         int candy=0;
         int children[]=new int[ratings.length];
