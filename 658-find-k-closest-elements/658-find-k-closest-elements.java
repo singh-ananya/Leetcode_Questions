@@ -14,16 +14,16 @@ class Solution {
         }
     }
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
-        PriorityQueue<Pair> MaxHeap = new PriorityQueue<>();
+        PriorityQueue<Pair> pq = new PriorityQueue<>();
         List<Integer> ans = new ArrayList<>();
         for(int i = 0;i<arr.length;i++){
-            MaxHeap.add(new Pair(Math.abs(arr[i]-x),arr[i]));
-            if(MaxHeap.size()>k){
-                MaxHeap.poll();
+            pq.add(new Pair(Math.abs(arr[i]-x),arr[i]));
+            if(pq.size()>k){
+                pq.poll();
             }
         }
-        while(MaxHeap.size()>0){
-            ans.add(MaxHeap.poll().num);
+        while(pq.size()>0){
+            ans.add(pq.poll().num);
         }
         Collections.sort(ans);//klogk time
         return ans;
