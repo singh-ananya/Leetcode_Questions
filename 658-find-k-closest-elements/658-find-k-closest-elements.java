@@ -25,7 +25,7 @@ class Solution {
         while(MaxHeap.size()>0){
             ans.add(MaxHeap.poll().num);
         }
-        Collections.sort(ans);
+        Collections.sort(ans);//klogk time
         return ans;
     }
 }
