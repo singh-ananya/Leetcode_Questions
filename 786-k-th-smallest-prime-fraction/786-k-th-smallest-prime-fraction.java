@@ -1,7 +1,14 @@
 class Solution {
+    
     public int[] kthSmallestPrimeFraction(int[] arr, int k) {
         PriorityQueue<int[]> pq=new PriorityQueue<>((a,b)->{
-            return a[0]*b[1] - b[0]*a[1];
+            double x=(double)a[0]/a[1];
+            double y=(double)b[0]/b[1];
+            if(x>y)
+                return 1;
+            else
+                return -1;
+            
         });
         int res[]=new int[2];
          if(arr.length == 0 || k == 0)
