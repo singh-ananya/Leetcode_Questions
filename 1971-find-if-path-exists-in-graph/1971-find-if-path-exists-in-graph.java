@@ -17,6 +17,8 @@ class Solution {
     public boolean dfs(int src,int dst,ArrayList<Integer> graph[],boolean[] vis){
         if(src==dst)
             return true;
+        if(vis[src]==true)
+            return false;
         vis[src]=true;
         for(int nbr:graph[src]){
             if(vis[nbr]==false){
