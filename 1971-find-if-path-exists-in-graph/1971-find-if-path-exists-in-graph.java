@@ -1,4 +1,14 @@
 class Solution {
+    /**
+   * Time O(V^2)
+   *  - we need to visit all vertices and each vertex visits 1 less vertex than the previous vertex.
+   *    Which is (V - 1) + (V - 2) + ... + 1 + 0 = V! = ((V - 1) + 0)*V / 2 = O(V^2)
+   * Space O(V)     
+   */
+    /**
+   * Time O(V^2 + E)
+   * Space O(V^2)
+   */
     public boolean validPath(int n, int[][] edges, int src, int des) {
         if(src==des)
             return true;
@@ -11,7 +21,27 @@ class Solution {
         graph[edge[0]].add(edge[1]);
         graph[edge[1]].add(edge[0]);
     }
-        return dfs(src,des,graph,new boolean[n]);
+       // return dfs(src,des,graph,new boolean[n]);
+        Queue<Integer>q= new LinkedList<>();
+        boolean[] vis=new boolean[n];
+        q.add(src);
+        vis[src]=true;
+        
+        while(!q.isEmpty()){
+            int top=q.poll();
+            if(top==des){
+                return true;
+            }
+            
+            for(int ele:graph[top]){
+                if(!vis[ele]){
+                    q.add(ele);
+                    vis[ele]=true;
+                }
+            }
+        }
+        
+        return false;
         
     }
     public boolean dfs(int src,int dst,ArrayList<Integer> graph[],boolean[] vis){
