@@ -1,72 +1,50 @@
-class Node implements Comparator<Node> {
-    private int v;
-    private double weight;
-    
-    Node(int v, double weight) {
-        this.v = v;
-        this.weight = weight;
-    }
-    Node() {
-        
-    }
-    int getV() {
-        return v;
-    }
-    double getWeight() {
-        return weight;
-    }
-    @Override
-    public int compare(Node n1, Node n2) { // max heap
-        if(n1.weight < n2.weight) {
-            return 1;
+ class Pair implements Comparator<Pair>{
+        int v;
+        double prob;
+        Pair(int v,double prob){
+            this.v=v;
+            this.prob=prob;
         }
-        if(n1.weight > n2.weight) {
-            return -1;
+     Pair(){
+         
+     }
+        @Override
+        public int compare(Pair p1,Pair p2){
+            if(p1.prob<p2.prob)
+                return 1;
+            else if(p1.prob>p2.prob)
+                return -1;
+            else 
+                return 0;
         }
-        return 0;
     }
-}
 class Solution {
     public double maxProbability(int n, int[][] edges, double[] succProb, int start, int end) {
-        List<List<Node>> adj = new ArrayList<>();
-        
-        for(int i=0 ; i<n ; i++) {
-            adj.add(new ArrayList<>());
+        List<List<Pair>> graph=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            graph.add(new ArrayList<Pair>());
         }
-        for(int i=0 ; i<edges.length ; i++) {
-            int u = edges[i][0];
-            int v = edges[i][1];
-            double wt = succProb[i];
-
-            adj.get(u).add(new Node(v, wt));
-            adj.get(v).add(new Node(u, wt));
+       
+        for(int i=0;i<edges.length;i++){
+            graph.get(edges[i][0]).add(new Pair(edges[i][1],succProb[i]));
+            graph.get(edges[i][1]).add(new Pair(edges[i][0],succProb[i]));
         }
-
-        PriorityQueue<Node> pq = new PriorityQueue<>(n, new Node());
-        pq.add(new Node(start, 1));
-        
-        HashSet<Integer> pst = new HashSet<>();
-        
-        while(!pq.isEmpty()) {
-            Node node = pq.poll();
-            int num = node.getV();
-            double prob = node.getWeight();
-            
-            pst.add(num);
-            
-            if(num == end) {
+        HashSet<Integer> hs = new HashSet<>();
+        PriorityQueue<Pair> pq = new PriorityQueue<>(n,new Pair());
+        pq.offer(new Pair(start,1.0));
+        while(pq.size()>0){
+            Pair node=pq.remove();
+            int v=node.v;
+            double prob=node.prob;
+            hs.add(v);
+            if(end==v)
                 return prob;
-            }
-            
-            if(adj.get(num) != null) {
-                for(Node it : adj.get(num)) {
-                    if(!pst.contains(it.getV())) {
-                        pq.add(new Node(it.getV(), prob * it.getWeight()));
-                    }
-                }
+            for(Pair temp:graph.get(v)){
+                if(!hs.contains(temp.v))
+                    pq.add(new Pair(temp.v,prob*temp.prob));
             }
         }
-        
         return 0;
+        
     }
 }
