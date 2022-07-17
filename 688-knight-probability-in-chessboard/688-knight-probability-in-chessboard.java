@@ -1,5 +1,7 @@
 class Solution {
     int knightMoves[][]={{-2,-1},{-1,-2},{1,-2},{2,-1},{2,1},{1,2},{-1,2},{-2,1}};
+    //tc=O{n*n}
+    //sc=O{n*n}
     public double knightProbability(int n, int k, int row, int col) {
         //return rec(n,row,col,k);
         Double[][][] dp=new Double[k+1][n][n];
