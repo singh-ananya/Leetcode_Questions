@@ -1,42 +1,40 @@
-class Node{
-    String value;
-    Node next;
-    Node prev;
-    Node(String value){
-        this.value=value;
-    }
-}
 class BrowserHistory {
+    class Node {
+        String url;
+        Node prev;
+        Node next;
+        
+        Node(String url){
+            this.url = url;
+        }
+    }
     Node head;
-    Node curr;
-
     public BrowserHistory(String homepage) {
-        head=new Node(homepage);
-        this.curr=head;
+        head = new Node(homepage);
     }
     
     public void visit(String url) {
-        Node n=new Node(url);
-        n.prev=curr;
-        curr.next=n;
-        curr=n;
+        Node temp = new Node(url);
+        
+        temp.prev = head;
+        temp.next = null;
+        
+        head.next = temp;
+        head = temp;
     }
     
     public String back(int steps) {
-        for(int i=0;i<steps;i++){
-            if(curr.prev!=null){
-                curr=curr.prev;
-            }
+        for (int i = 0; i < steps && head.prev != null; i++){
+             head = head.prev;
         }
-        return curr.value;
+        return head.url;
     }
     
     public String forward(int steps) {
-        for(int i=0;i<steps;i++){
-            if(curr.next!=null)
-                curr=curr.next;
+        for (int i = 0; i < steps && head.next != null; i++){
+            head = head.next;
         }
-        return curr.value;
+        return head.url;
     }
 }
 
