@@ -11,6 +11,12 @@ class Solution {
         Arrays.sort(engineers,(a,b)->{
             return b[0]-a[0];
         });
+         //now when we traverse we can always take k elements as 
+     //taking less won't increase our sum but it would be disadvantageous
+     //and for every efficiency we check whwether sum is max or not 
+     //as efficieny is decreasing as we move 
+     //any prev speed summed isn't different so we can remove lowest speed
+     //to get max sum and atmost k speeds are used including curr speed
         PriorityQueue<Integer> pq=new PriorityQueue<>();
         for(int i=0;i<n;i++){
             sum+=engineers[i][1];
